@@ -840,13 +840,11 @@ tr {
     border-bottom: none;
 }
 
-.collapsable-container {
-    display: none;
-}
-
+.collapsable-container,
 .collapsable-container1 {
     display: none;
 }
+
 
 .left-column,
 .right-column {
