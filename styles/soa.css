@@ -1,0 +1,325 @@
+* {
+    font-family: "Source Serif 4", serif;
+}
+
+body {
+    background-color: #F5F6FA;
+    margin: 0;
+    padding: 20px;
+}
+
+.soa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: white;
+    border-radius: 20px;
+    width: 90%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;  /* Add this to ensure logo positioning works */
+    min-height: 0;
+    height: auto;
+}
+
+.soa-header {
+    display: flex;
+    flex-direction: column;  /* Change to column layout */
+    align-items: center;     /* Center horizontally */
+    margin-bottom: 15px;
+    gap: 10px;
+    margin-top: 60px; /* Add space for logo */
+}
+
+.soa-header h1 {
+    font-weight: 900;
+    color: #0B192C;
+    margin: 0;
+    text-align: center;     /* Center the text */
+    width: 100%;            /* Full width */
+}
+
+/* Add this new container for the info sections */
+.info-container {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.date-range {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.date-range input[type="date"] {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 50px;
+    box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.75);
+}
+
+.date-range button {
+    background-color: #1E3E62;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.print-btn {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1E3E62;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    z-index: 1;
+}
+
+#soaContent {
+    margin-top: 30px;
+}
+
+.borrower-info {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    width: 100%;            /* Full width for info sections */
+    flex: 1;
+    min-width: 45%; /* Ensure minimum width */
+}
+
+.borrower-info h2 {
+    color: #0B192C;
+    margin-top: 0;
+}
+
+.transactions table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+}
+
+.transactions th {
+    background-color: #0B192C;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+.transactions td {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.summary h2 {
+    color: #0B192C;
+    margin-top: 0;
+}
+
+.summary p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.outstanding-balance {
+    font-weight: bold;
+    color: #1E3E62;
+    font-size: 1.2em;
+}
+
+.remaining-interest {
+    color: #d35400;
+    font-weight: bold;
+}
+.payment-schedule,
+.summary {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.loan-details {
+    width: 100%;            /* Full width for info sections */
+    flex: 1;
+    min-width: 45%; /* Ensure minimum width */
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.payment-schedule table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.payment-schedule th,
+.payment-schedule td {
+    padding: 6px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9em;
+}
+
+.payment-schedule th {
+    background-color: #1E3E62;
+    color: white;
+}
+
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    .soa-container {
+        width: 100%;
+        padding: 15px;
+        box-shadow: none;
+        max-height: 100vh;
+        overflow: hidden;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    .date-range, 
+    .print-btn {
+        display: none;
+    }
+
+    .transactions th {
+        background-color: #0B192C !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .logo {
+        display: block !important;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 120px;
+    }
+
+    .soa-header {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+
+    .soa-header h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .info-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .borrower-info p,
+    .loan-details p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
+
+    .payment-schedule {
+        margin: 10px 0;
+    }
+
+    .payment-schedule h2,
+    .summary h2 {
+        font-size: 1.2em;
+        margin: 5px 0;
+    }
+
+    .payment-schedule table {
+        font-size: 0.85em;
+    }
+
+    .payment-schedule th,
+    .payment-schedule td {
+        padding: 4px;
+    }
+
+    .summary {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .summary p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
+
+    /* Force background colors in print */
+    .payment-schedule th {
+        background-color: #1E3E62 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Prevent page breaks inside elements */
+    .payment-schedule,
+    .summary,
+    .info-container {
+        page-break-inside: avoid;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .soa-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .date-range {
+        flex-wrap: wrap;
+    }
+
+    .transactions {
+        overflow-x: auto;
+    }
+
+    .info-container {
+        flex-direction: column;
+    }
+    
+    .borrower-info,
+    .loan-details {
+        width: 100%;
+    }
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px;  /* Increased size */
+    height: auto;
+    max-width: 100%;
+}

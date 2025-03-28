@@ -1,0 +1,809 @@
+* {
+    font-family: "Source Serif 4", serif;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+body {
+    background-color: #F5F6FA;
+    height: 98vh;
+    margin: 0 0 0 0;
+}
+
+/* Start of Navigation Bar CSS */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: #0B192C; */
+    background-image: linear-gradient(135deg, #0B192C, #1E2E62);
+    color: white;
+    max-height: 200px;
+    height: 84px;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-container img {
+    width: 300px;
+    height: 100%;
+    margin: 5px 0 0 0;
+    object-fit: cover;
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+    margin: 0 20px 0 0;
+}
+
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    margin: 0 20px 0 0;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline;
+    cursor: pointer;
+}
+
+.profile-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.profile-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profile-dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.profile-dropdown:hover .profile-dropdown-content {
+    display: block;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+/* End of Navigation Bar CSS */
+
+/* Start of Main Content CSS */
+
+.audit-logs-header {
+    font-weight: 900;
+    margin: 0;
+    padding: 20px 20px 10px 20px; /* Reduced bottom padding */
+}
+
+.audit-logs-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 96%; /* Slightly increased width */
+    margin: 20px auto;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.audit-logs-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 20px 0;
+    padding: 10px 20px; /* Adjusted padding */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.audit-logs-buttons-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-right: 10px; /* Added margin */
+}
+
+.audit-logs-buttons button {
+    background-color: #0B192C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.audit-logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px; /* Reduced top margin */
+    overflow-x: hidden; /* Hide overflow instead of scroll */
+    margin-bottom: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.audit-logs-table table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 20px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+}
+
+.audit-logs-table th,
+.audit-logs-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    vertical-align: middle;
+    color: #0B192C;
+}
+
+.audit-logs-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.audit-logs-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Adjust the container to accommodate the larger search box */
+.audit-logs-controls {
+    padding: 10px 0; /* Reduced padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Add or update these styles */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Reduced margin */
+    padding: 5px 10px; /* Reduced padding */
+    width: 100%;
+}
+
+.search-container {
+    flex: 1;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-left: auto; /* Push buttons to the right */
+}
+
+.dataTables_filter {
+    text-align: left !important;
+    margin: 0 !important;
+    float: left !important; /* Force left alignment */
+    width: auto;
+}
+
+.dataTables_filter input.audit-search-input {
+    width: 400px !important;
+    height: 40px !important;
+    padding: 8px 16px !important;
+    font-size: 16px !important;
+    border: 2px solid #ddd !important;
+    border-radius: 6px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.dataTables_filter input.audit-search-input:focus {
+    border-color: #1E2E62 !important;
+    outline: none !important;
+    border-color: #1E3E62;
+    outline: none;
+}
+
+.control-btn {
+    height: 40px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #1E2E62;
+    background-color: #1E3E62;
+    font-weight: 700;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn:hover {
+    background-color: #0B192C;
+}
+
+/* Add these new styles */
+.dataTables_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 100%;
+}
+
+.bottom {
+    margin-top: 30px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #ddd;
+}
+
+.dataTables_info {
+    margin-top: 10px !important;
+}
+
+.dataTables_paginate {
+    margin-top: 10px !important;
+    margin-top: 20px;
+}
+
+#auditLogsTable {
+    width: calc(100% - 40px); /* Subtract padding from width */
+    margin: 0 20px 20px 20px !important; /* Added horizontal margins */
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+#auditLogsTable th {
+    background-color: #0B192C;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+#auditLogsTable td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    max-width: 180px;
+    word-wrap: break-word;
+    white-space: normal;
+    box-sizing: border-box;
+}
+
+#auditLogsTable td:last-child {
+    max-width: 130px;
+    padding-right: 20px; /* Added right padding for last column */
+}
+
+#auditLogsTable tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Override DataTables default styles */
+.dataTables_wrapper .dataTables_filter {
+    float: left !important;
+    text-align: left !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0 !important;
+}
+/* Add new styles for category filter dropdown */
+.category-filter-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-top: 40px;
+    right: 160px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.1);
+}
+
+#categoryFilter {
+    font-family: inherit;
+    font-size: 14px;
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+#categoryFilter option {
+    padding: 8px;
+}
+
+#categoryFilter:focus {
+    outline: none;
+    border-color: #1E3E62;
+}
+notification-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    display: none;
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
+    border-left: 3px solid #007bff;
+}
+
+
+
+.notification-item.warning {
+    border-left: 3px solid #ffc107;
+    background-color: #fff9e6;
+}
+
+.notification-count {
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 15px;
+    min-width: 20px;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.notification-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+
+.notification-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    margin: 0 20px 0 0;
+}
+
+.notification {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.notification-icon {
+    vertical-align: middle;
+}
+
+.dashboard-header-right-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.notification-dropdown p {
+    color: #0B192C;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notification-dropdown a {
+    color: #0B192C;
+    display: block;
+    text-align: center;
+}
+
+.notification-dropdown p:last-child {
+    border-bottom: none;
+}
+
+/* Remove or comment out these styles */
+/*.mark-read-btn {...}*/
+/*.mark-read-btn:hover {...}*/
+/*.read-status {...}*/
+
+/* Add other existing styles... */
+.notification-item small {
+    color: #666;
+    font-size: 0.8em;
+}
+
+.view-more-btn {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.view-more-btn button {
+    background: none;
+    border: none;
+    color: #1E3E62;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.view-more-btn button:hover {
+    background-color: #f5f5f5;
+    text-decoration: underline;
+}
+
+/* Notification Styling */
+.notification {
+    position: relative;
+    padding: 0 15px;
+}
+
+.notification-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.notification-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.notification-icon svg {
+    color: #ffffff;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    border: 1px solid #e2e8f0;
+}
+
+.notification:hover .notification-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.notification-dropdown-header {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.notification-dropdown-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.notification-dropdown-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.notification-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    background-color: #f7fafc;
+}
+
+.notification-item-icon {
+    padding: 8px;
+    background: #ebf4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-item-content {
+    flex: 1;
+}
+
+.notification-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.notification-item-message {
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.4;
+}
+
+.notification-item-time {
+    font-size: 12px;
+    color: #a0aec0;
+    margin-top: 4px;
+}
+
+.notification-dropdown-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.notification-dropdown-footer a {
+    color: #4299e1;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.notification-dropdown-footer a:hover {
+    text-decoration: underline;
+}
+
+.view-more-btn {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.view-more-btn button {
+    background: none;
+    border: none;
+    color: #1E3E62;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.view-more-btn button:hover {
+    background-color: #f5f5f5;
+    text-decoration: underline;
+}
+
+@media print {
+    /* Hide non-essential elements when printing */
+    nav, 
+    .audit-logs-controls,
+    .dataTables_length,
+    .dataTables_filter,
+    .dataTables_info,
+    .dataTables_paginate {
+        display: none !important;
+    }
+
+    /* Ensure table fits on paper */
+    .audit-logs-container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .audit-logs-table {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Adjust table styling for print */
+    #auditLogsTable {
+        width: 100% !important;
+        font-size: 10pt !important;
+        border-collapse: collapse !important;
+    }
+
+    #auditLogsTable th,
+    #auditLogsTable td {
+        padding: 5px !important;
+        border: 1px solid #ddd !important;
+    }
+
+    /* Add title for print */
+    .audit-logs-header {
+        text-align: center !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Force background colors to print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    @page {
+        margin: 1.5cm;
+        size: A4 portrait;
+    }
+    
+    body * {
+        visibility: hidden;
+    }
+    
+    .print-container, .print-container * {
+        visibility: visible;
+    }
+    
+    .print-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    #auditLogsTable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10pt;
+    }
+    
+    #auditLogsTable th {
+        background-color: #0B192C !important;
+        color: white !important;
+        padding: 8px;
+        font-weight: bold;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    #auditLogsTable td {
+        padding: 6px;
+        border: 1px solid #ddd;
+    }
+    
+    .print-header h1 {
+        font-size: 14pt;
+        color: #0B192C;
+        margin-bottom: 8px;
+    }
+    
+    .print-header p {
+        font-size: 10pt;
+        color: #666;
+        margin-bottom: 16px;
+    }
+}
+
+/* Add this to ensure all elements use border-box sizing */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
