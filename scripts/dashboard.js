@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let imgInput = document.querySelectorAll(".img-input");
   let profileDropdown = document.querySelector(".profile-dropdown");
   let arrowDownIcon = document.querySelector(".arrow-down-icon");
+  let formHeader = document.querySelector(".form-header");
+  let dropdownIcon = document.querySelector(".arrow-header-icon");
+  let collapsableContainer = document.querySelector(".collapsable-container");
   const notificationIcon = document.querySelector(".notification-icon");
   const notificationDropdown = document.querySelector(".notification-dropdown");
 
@@ -49,6 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
         notificationDropdown.style.display = "none";
       }
     }
+  });
+  formHeader.addEventListener("click", function () {
+    dropdownIcon.style.transform =
+      dropdownIcon.style.transform === "rotate(180deg)"
+        ? "rotate(0deg)"
+        : "rotate(180deg)";
+
+    collapsableContainer.style.display =
+      collapsableContainer.style.display === "block" ? "none" : "block";
   });
 
   addbtn.addEventListener("click", function () {
@@ -1546,7 +1558,9 @@ function generateRowContent(type, item) {
                 <td>${item.remarks}</td>
                 <td>${formatCurrency(item.balance)}</td>
                 <td>
-                    <button onclick="handlePayment('${item.reference_no}')">Pay</button>
+                    <button onclick="handlePayment('${
+                      item.reference_no
+                    }')">Pay</button>
                 </td>
             `;
     default:
@@ -1678,278 +1692,300 @@ function submitPayment(referenceNo, amount) {
 }
 
 function fetchNotifications(showAll = false) {
-  fetch('scripts/AJAX/notification.php')
-      .then(response => response.json())
-      .then(data => {
-          if (data.status === 'success') {
-              const notificationDropdown = document.querySelector('.notification-dropdown-content');
-              
-              if (data.count > 0) {
-                  // Update notification icon to show count
-                  const notificationCount = document.createElement('span');
-                  notificationCount.className = 'notification-count';
-                  notificationCount.textContent = data.count;
-                  document.querySelector('.notification-icon').appendChild(notificationCount);
+  fetch("scripts/AJAX/notification.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        const notificationDropdown = document.querySelector(
+          ".notification-dropdown-content"
+        );
 
-                  // Clear existing notifications
-                  notificationDropdown.innerHTML = '';
+        if (data.count > 0) {
+          // Update notification icon to show count
+          const notificationCount = document.createElement("span");
+          notificationCount.className = "notification-count";
+          notificationCount.textContent = data.count;
+          document
+            .querySelector(".notification-icon")
+            .appendChild(notificationCount);
 
-                  // Determine how many notifications to show
-                  const notificationsToShow = showAll ? data.notifications : data.notifications.slice(0, 3);
+          // Clear existing notifications
+          notificationDropdown.innerHTML = "";
 
-                  // Add notifications
-                  notificationsToShow.forEach(notification => {
-                      const notifItem = document.createElement('div');
-                      notifItem.className = 'notification-item';
-                      
-                      // Add urgency class based on days remaining
-                      if (notification.days_remaining <= 7) {
-                          notifItem.classList.add('urgent');
-                      } else if (notification.days_remaining <= 14) {
-                          notifItem.classList.add('warning');
-                      }
-                      
-                      notifItem.innerHTML = `
+          // Determine how many notifications to show
+          const notificationsToShow = showAll
+            ? data.notifications
+            : data.notifications.slice(0, 3);
+
+          // Add notifications
+          notificationsToShow.forEach((notification) => {
+            const notifItem = document.createElement("div");
+            notifItem.className = "notification-item";
+
+            // Add urgency class based on days remaining
+            if (notification.days_remaining <= 7) {
+              notifItem.classList.add("urgent");
+            } else if (notification.days_remaining <= 14) {
+              notifItem.classList.add("warning");
+            }
+
+            notifItem.innerHTML = `
                           <p>${notification.message}</p>
                           <small>${notification.type}</small>
                       `;
-                      notificationDropdown.appendChild(notifItem);
-                  });
+            notificationDropdown.appendChild(notifItem);
+          });
 
-                  // Add "View More" button if there are more than 3 notifications
-                  if (!showAll && data.notifications.length > 3) {
-                      const viewMoreBtn = document.createElement('div');
-                      viewMoreBtn.className = 'view-more-btn';
-                      viewMoreBtn.innerHTML = `
+          // Add "View More" button if there are more than 3 notifications
+          if (!showAll && data.notifications.length > 3) {
+            const viewMoreBtn = document.createElement("div");
+            viewMoreBtn.className = "view-more-btn";
+            viewMoreBtn.innerHTML = `
                           <button>
                               View More (${data.notifications.length - 3} more)
                           </button>
                       `;
-                      viewMoreBtn.addEventListener('click', () => {
-                          fetchNotifications(true);
-                      });
-                      notificationDropdown.appendChild(viewMoreBtn);
-                  }
-
-                  // Add "Show Less" button when showing all notifications
-                  if (showAll && data.notifications.length > 3) {
-                      const showLessBtn = document.createElement('div');
-                      showLessBtn.className = 'view-more-btn';
-                      showLessBtn.innerHTML = '<button>Show Less</button>';
-                      showLessBtn.addEventListener('click', () => {
-                          fetchNotifications(false);
-                      });
-                      notificationDropdown.appendChild(showLessBtn);
-                  }
-              } else {
-                  notificationDropdown.innerHTML = '<p>No new notifications</p>';
-              }
+            viewMoreBtn.addEventListener("click", () => {
+              fetchNotifications(true);
+            });
+            notificationDropdown.appendChild(viewMoreBtn);
           }
-      })
-      .catch(error => console.error('Error:', error));
+
+          // Add "Show Less" button when showing all notifications
+          if (showAll && data.notifications.length > 3) {
+            const showLessBtn = document.createElement("div");
+            showLessBtn.className = "view-more-btn";
+            showLessBtn.innerHTML = "<button>Show Less</button>";
+            showLessBtn.addEventListener("click", () => {
+              fetchNotifications(false);
+            });
+            notificationDropdown.appendChild(showLessBtn);
+          }
+        } else {
+          notificationDropdown.innerHTML = "<p>No new notifications</p>";
+        }
+      }
+    })
+    .catch((error) => console.error("Error:", error));
 }
 
 // Call fetchNotifications when page loads and every 5 minutes
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   fetchNotifications();
   setInterval(fetchNotifications, 300000); // 5 minutes
 });
 
 // Add click event listener for notification icon if not already present
-if (!document.querySelector('.notification-icon').hasAttribute('listener')) {
-  document.querySelector('.notification-icon').setAttribute('listener', 'true');
-  document.querySelector('.notification-icon').addEventListener('click', function() {
-      const dropdown = document.querySelector('.notification-dropdown');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  });
+if (!document.querySelector(".notification-icon").hasAttribute("listener")) {
+  document.querySelector(".notification-icon").setAttribute("listener", "true");
+  document
+    .querySelector(".notification-icon")
+    .addEventListener("click", function () {
+      const dropdown = document.querySelector(".notification-dropdown");
+      dropdown.style.display =
+        dropdown.style.display === "block" ? "none" : "block";
+    });
 }
 
 // Replace the existing notification click handler
-document.querySelector('.notification-icon').addEventListener('click', function(e) {
+document
+  .querySelector(".notification-icon")
+  .addEventListener("click", function (e) {
     e.stopPropagation(); // Prevent event from bubbling up
-    const dropdown = document.querySelector('.notification-dropdown');
-    const isVisible = dropdown.style.display === 'block';
-    
+    const dropdown = document.querySelector(".notification-dropdown");
+    const isVisible = dropdown.style.display === "block";
+
     // Close all other dropdowns first
-    document.querySelectorAll('.notification-dropdown').forEach(d => {
-        d.style.display = 'none';
+    document.querySelectorAll(".notification-dropdown").forEach((d) => {
+      d.style.display = "none";
     });
 
     // Toggle this dropdown
-    dropdown.style.display = isVisible ? 'none' : 'block';
-});
+    dropdown.style.display = isVisible ? "none" : "block";
+  });
 
 // Close dropdown when clicking outside
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.notification')) {
-        document.querySelector('.notification-dropdown').style.display = 'none';
-    }
+document.addEventListener("click", function (e) {
+  if (!e.target.closest(".notification")) {
+    document.querySelector(".notification-dropdown").style.display = "none";
+  }
 });
 
 // Prevent dropdown from closing when clicking inside it
-document.querySelector('.notification-dropdown').addEventListener('click', function(e) {
+document
+  .querySelector(".notification-dropdown")
+  .addEventListener("click", function (e) {
     e.stopPropagation();
-});
+  });
 // Add after your existing document.ready function
-const generateSoaBtn = document.getElementById('generateSoaBtn');
-const soaModal = document.getElementById('soaModal');
-const previewSoaBtn = document.getElementById('previewSoaBtn');
-const downloadSoaBtn = document.getElementById('downloadSoaBtn');
-const loanSelect = document.getElementById('loanSelect');
+const generateSoaBtn = document.getElementById("generateSoaBtn");
+const soaModal = document.getElementById("soaModal");
+const previewSoaBtn = document.getElementById("previewSoaBtn");
+const downloadSoaBtn = document.getElementById("downloadSoaBtn");
+const loanSelect = document.getElementById("loanSelect");
 
 // Enable SOA button when borrower is selected
 function enableSoaButton() {
-    generateSoaBtn.disabled = !originalValues?.id;
+  generateSoaBtn.disabled = !originalValues?.id;
 }
 
 // Load loans for SOA generation
 function loadLoanOptions(borrowerId) {
-  const loanSelect = document.getElementById('loanSelect');
+  const loanSelect = document.getElementById("loanSelect");
   loanSelect.innerHTML = '<option value="">Select a loan transaction</option>';
-  
+
   fetch(`scripts/AJAX/get_borrower_loans.php?borrowerId=${borrowerId}`)
-      .then(response => response.json())
-      .then(loans => {
-          if (Array.isArray(loans)) {
-              loans.forEach(loan => {
-                  const option = document.createElement('option');
-                  option.value = loan.id;
-                  option.textContent = `Loan #${loan.reference_no} - ${new Date(loan.loan_date).toLocaleDateString()} (₱${parseFloat(loan.loan_amount).toLocaleString()})`;
-                  loanSelect.appendChild(option);
-              });
-              // Enable the preview button if loans are available
-              document.getElementById('previewSoaBtn').disabled = loans.length === 0;
-          }
-      })
-      .catch(error => {
-          console.error('Error loading loans:', error);
-          Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Failed to load loan data'
-          });
+    .then((response) => response.json())
+    .then((loans) => {
+      if (Array.isArray(loans)) {
+        loans.forEach((loan) => {
+          const option = document.createElement("option");
+          option.value = loan.id;
+          option.textContent = `Loan #${loan.reference_no} - ${new Date(
+            loan.loan_date
+          ).toLocaleDateString()} (₱${parseFloat(
+            loan.loan_amount
+          ).toLocaleString()})`;
+          loanSelect.appendChild(option);
+        });
+        // Enable the preview button if loans are available
+        document.getElementById("previewSoaBtn").disabled = loans.length === 0;
+      }
+    })
+    .catch((error) => {
+      console.error("Error loading loans:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to load loan data",
       });
+    });
 }
 
 // Handle SOA button click
-generateSoaBtn.addEventListener('click', () => {
-    if (!originalValues || !originalValues.id) {
-        Swal.fire('Error', 'Please select a borrower first', 'error');
-        return;
-    }
-    
-    loadLoanOptions(originalValues.id);
-    soaModal.style.display = 'block';
+generateSoaBtn.addEventListener("click", () => {
+  if (!originalValues || !originalValues.id) {
+    Swal.fire("Error", "Please select a borrower first", "error");
+    return;
+  }
+
+  loadLoanOptions(originalValues.id);
+  soaModal.style.display = "block";
 });
 
 // Preview SOA
-previewSoaBtn.addEventListener('click', () => {
-    const loanId = loanSelect.value;
-    if (!loanId) {
-        Swal.fire('Error', 'Please select a loan transaction', 'error');
-        return;
-    }
+previewSoaBtn.addEventListener("click", () => {
+  const loanId = loanSelect.value;
+  if (!loanId) {
+    Swal.fire("Error", "Please select a loan transaction", "error");
+    return;
+  }
 
-    // Open SOA in new window
-    window.open(`soa.php?borrowerId=${originalValues.id}&loanId=${loanId}`, '_blank');
+  // Open SOA in new window
+  window.open(
+    `soa.php?borrowerId=${originalValues.id}&loanId=${loanId}`,
+    "_blank"
+  );
 });
 
 // Download SOA
-downloadSoaBtn.addEventListener('click', async () => {
-    const loanId = loanSelect.value;
-    if (!loanId) {
-        Swal.fire('Error', 'Please select a loan transaction', 'error');
-        return;
+downloadSoaBtn.addEventListener("click", async () => {
+  const loanId = loanSelect.value;
+  if (!loanId) {
+    Swal.fire("Error", "Please select a loan transaction", "error");
+    return;
+  }
+
+  try {
+    const response = await fetch("scripts/AJAX/generate_soa.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        borrowerId: originalValues.id,
+        loanId: loanId,
+      }),
+    });
+
+    const data = await response.json();
+    if (data.status === "success") {
+      // Create form for download
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "scripts/AJAX/download_soa.php";
+      form.target = "_blank";
+
+      const dataInput = document.createElement("input");
+      dataInput.type = "hidden";
+      dataInput.name = "soa_data";
+      dataInput.value = JSON.stringify(data.data);
+
+      form.appendChild(dataInput);
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    } else {
+      throw new Error(data.message || "Failed to generate SOA");
     }
-
-    try {
-        const response = await fetch('scripts/AJAX/generate_soa.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                borrowerId: originalValues.id,
-                loanId: loanId
-            })
-        });
-
-        const data = await response.json();
-        if (data.status === 'success') {
-            // Create form for download
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'scripts/AJAX/download_soa.php';
-            form.target = '_blank';
-
-            const dataInput = document.createElement('input');
-            dataInput.type = 'hidden';
-            dataInput.name = 'soa_data';
-            dataInput.value = JSON.stringify(data.data);
-
-            form.appendChild(dataInput);
-            document.body.appendChild(form);
-            form.submit();
-            document.body.removeChild(form);
-        } else {
-            throw new Error(data.message || 'Failed to generate SOA');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        Swal.fire('Error', error.message, 'error');
-    }
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire("Error", error.message, "error");
+  }
 });
 
 // Close modal when clicking the close button
-document.querySelector('[data-modal="soaModal"]').addEventListener('click', () => {
-    soaModal.style.display = 'none';
-});
+document
+  .querySelector('[data-modal="soaModal"]')
+  .addEventListener("click", () => {
+    soaModal.style.display = "none";
+  });
 
-generateSoaBtn.addEventListener('click', () => {
-    if (!originalValues || !originalValues.id) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Please select a borrower first'
-        });
-        return;
-    }
-    
-    loadLoanOptions(originalValues.id);
-    soaModal.style.display = 'block';
+generateSoaBtn.addEventListener("click", () => {
+  if (!originalValues || !originalValues.id) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please select a borrower first",
+    });
+    return;
+  }
+
+  loadLoanOptions(originalValues.id);
+  soaModal.style.display = "block";
 });
 
 // Preview SOA handler
-previewSoaBtn.addEventListener('click', () => {
-    const loanId = loanSelect.value;
-    if (!loanId) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Please select a loan to generate SOA'
-        });
-        return;
-    }
+previewSoaBtn.addEventListener("click", () => {
+  const loanId = loanSelect.value;
+  if (!loanId) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please select a loan to generate SOA",
+    });
+    return;
+  }
 
-    const soaUrl = `soa.php?borrowerId=${originalValues.id}&loanId=${loanId}`;
-    const previewWindow = window.open(soaUrl, '_blank');
-    
-    // Enable download button after preview
-    downloadSoaBtn.disabled = false;
+  const soaUrl = `soa.php?borrowerId=${originalValues.id}&loanId=${loanId}`;
+  const previewWindow = window.open(soaUrl, "_blank");
+
+  // Enable download button after preview
+  downloadSoaBtn.disabled = false;
 });
 
 // Download SOA handler
-downloadSoaBtn.addEventListener('click', () => {
-    const loanId = loanSelect.value;
-    if (!loanId) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Please select a loan to download SOA'
-        });
-        return;
-    }
+downloadSoaBtn.addEventListener("click", () => {
+  const loanId = loanSelect.value;
+  if (!loanId) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Please select a loan to download SOA",
+    });
+    return;
+  }
 
-    const soaUrl = `soa.php?borrowerId=${originalValues.id}&loanId=${loanId}&download=true`;
-    window.location.href = soaUrl;
+  const soaUrl = `soa.php?borrowerId=${originalValues.id}&loanId=${loanId}&download=true`;
+  window.location.href = soaUrl;
 });

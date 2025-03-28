@@ -116,52 +116,67 @@ $db->close();
             </div>
         </div>
 
+
         <div class="form-container">
-            <h1>Personal Information</h1>
+            <div class="form-header">
+                <h1>Personal Information</h1>
+                <svg class="arrow-header-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="m17.16 7.59l-5.66 5.66l-5.66-5.66l.71-.7l4.95 4.95l4.95-4.95zm0 4l-5.66 5.66l-5.66-5.66l.71-.7l4.95 4.95l4.95-4.95z" />
+                </svg>
+            </div>
             <form action="#" method="post" enctype="multipart/form-data">
-                <div class="personal-info-container">
-                    <div class="input-row">
-                        <div>
-                            <label for="fName">First Name</label>
-                            <input type="text" id="fName" name="fName" placeholder="First Name" class="input-text" required disabled>
-                        </div>
-                        <div>
-                            <label for="mName">Middle Name</label>
-                            <input type="text" id="mName" name="mName" placeholder="Middle Name" class="input-text" required disabled>
-                        </div>
-                        <div>
-                            <label for="surname">Surname</label>
-                            <input type="text" id="surname" name="surname" placeholder="Surname" class="input-text" required disabled>
-                        </div>
-                        <div>
-                            <label for="suffix">Suffix</label>
-                            <select id="suffix" name="suffix" class="input-text" disabled>
-                                <option value="" disabled selected>Select suffix</option>
-                                <option value="None">None</option>
-                                <option value="Jr.">Jr.</option>
-                                <option value="Sr.">Sr.</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Sex</label>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" id="male" name="sex" value="male" class="input-radio" disabled required>
-                                    <label for="male" class="radio-label">Male</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="female" name="sex" value="female" class="input-radio" disabled>
-                                    <label for="female" class="radio-label">Female</label>
+                <div class="collapsable-container">
+                    <div class="personal-info-container">
+                        <div class="input-row">
+                            <div>
+                                <label for="fName">First Name</label>
+                                <input type="text" id="fName" name="fName" placeholder="First Name" class="input-text"
+                                    required disabled>
+                            </div>
+                            <div>
+                                <label for="mName">Middle Name</label>
+                                <input type="text" id="mName" name="mName" placeholder="Middle Name" class="input-text"
+                                    required disabled>
+                            </div>
+                            <div>
+                                <label for="surname">Surname</label>
+                                <input type="text" id="surname" name="surname" placeholder="Surname" class="input-text"
+                                    required disabled>
+                            </div>
+                            <div>
+                                <label for="suffix">Suffix</label>
+                                <select id="suffix" name="suffix" class="input-text" disabled>
+                                    <option value="" disabled selected>Select suffix</option>
+                                    <option value="None">None</option>
+                                    <option value="Jr.">Jr.</option>
+                                    <option value="Sr.">Sr.</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Sex</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" id="male" name="sex" value="male" class="input-radio"
+                                            disabled required>
+                                        <label for="male" class="radio-label">Male</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" id="female" name="sex" value="female" class="input-radio"
+                                            disabled>
+                                        <label for="female" class="radio-label">Female</label>
+                                    </div>
                                 </div>
                             </div>
+                            <div>
+                                <label for="DOB">Date of Birth</label>
+                                <input type="date" id="DOB" name="DOB" class="input-text" required disabled>
+                            </div>
+                            <!-- Continue with other fields in similar single-column format -->
                         </div>
-                        <div>
-                            <label for="DOB">Date of Birth</label>
-                            <input type="date" id="DOB" name="DOB" class="input-text" required disabled>
-                        </div>
-                        <!-- Continue with other fields in similar single-column format -->
                     </div>
                 </div>
 
@@ -319,11 +334,12 @@ $db->close();
                     </div>
                     <div>
                         <label for="expiryDateInsurance">Expiry Date</label><br>
-                        <input type="date" id="expiryDateInsurance" name="expiryDateInsurance" class="input-text" disabled>
+                        <input type="date" id="expiryDateInsurance" name="expiryDateInsurance" class="input-text"
+                            disabled>
                     </div>
                     <div>
                         <label for="dependentName">Name of Dependent</label><br>
-                     <input type="text" id="dependentName" name="dependentName" class="input-text" disabled>
+                        <input type="text" id="dependentName" name="dependentName" class="input-text" disabled>
                     </div>
                     <div>
                         <label for="dependentContactNo">Dependent Contact No.</label><br>
@@ -509,7 +525,7 @@ $db->close();
                 <button id="tblPaymentBtn">Payment</button>
                 <button id="tblLoanBtn">Loan</button>
                 <button id="tblGroceryBtn">Grocery Item</button>
-                <button id="generateSoaBtn"class="soa-btn" disabled>Statement of Account</button>
+                <button id="generateSoaBtn" class="soa-btn" disabled>Statement of Account</button>
             </div>
 
             <div class="table-button-add">
