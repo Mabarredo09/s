@@ -180,31 +180,41 @@ $db->close();
                     </div>
                 </div>
 
-                <h1>Address</h1>
-                <div class="input-row">
-                    <div>
-                        <label for="homeNo">Home Number</label><br>
-                        <input type="text" id="homeNo" name="homeNo" class="input-text" required disabled>
-                    </div>
-                    <div>
-                        <label for="street">Street</label><br>
-                        <input type="text" id="street" name="street" class="input-text" required disabled>
-                    </div>
-                    <div>
-                        <label for="baranggay">Baranggay</label><br>
-                        <input type="text" id="baranggay" name="baranggay" class="input-text" required disabled>
-                    </div>
-                    <div>
-                        <label for="city">City</label><br>
-                        <input type="text" id="city" name="city" class="input-text" required disabled>
-                    </div>
-                    <div>
-                        <label for="province">Province</label><br>
-                        <input type="text" id="province" name="province" class="input-text" required disabled>
-                    </div>
-                    <div>
-                        <label for="region">Region</label><br>
-                        <input type="text" id="region" name="region" class="input-text" required disabled>
+
+                <div class="form-header1">
+                    <h1>Address</h1>
+                    <svg class="arrow-header-icon1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m17.16 7.59l-5.66 5.66l-5.66-5.66l.71-.7l4.95 4.95l4.95-4.95zm0 4l-5.66 5.66l-5.66-5.66l.71-.7l4.95 4.95l4.95-4.95z" />
+                    </svg>
+                </div>
+                <div class="collapsable-container1">
+                    <div class="input-row">
+                        <div>
+                            <label for="homeNo">Home Number</label><br>
+                            <input type="text" id="homeNo" name="homeNo" class="input-text" required disabled>
+                        </div>
+                        <div>
+                            <label for="street">Street</label><br>
+                            <input type="text" id="street" name="street" class="input-text" required disabled>
+                        </div>
+                        <div>
+                            <label for="baranggay">Baranggay</label><br>
+                            <input type="text" id="baranggay" name="baranggay" class="input-text" required disabled>
+                        </div>
+                        <div>
+                            <label for="city">City</label><br>
+                            <input type="text" id="city" name="city" class="input-text" required disabled>
+                        </div>
+                        <div>
+                            <label for="province">Province</label><br>
+                            <input type="text" id="province" name="province" class="input-text" required disabled>
+                        </div>
+                        <div>
+                            <label for="region">Region</label><br>
+                            <input type="text" id="region" name="region" class="input-text" required disabled>
+                        </div>
                     </div>
                 </div>
 

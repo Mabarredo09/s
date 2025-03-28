@@ -19,8 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let profileDropdown = document.querySelector(".profile-dropdown");
   let arrowDownIcon = document.querySelector(".arrow-down-icon");
   let formHeader = document.querySelector(".form-header");
+  let formHeader1 = document.querySelector(".form-header1");
   let dropdownIcon = document.querySelector(".arrow-header-icon");
+  let dropdownIcon1 = document.querySelector(".arrow-header-icon1");
   let collapsableContainer = document.querySelector(".collapsable-container");
+  let collapsableContainer1 = document.querySelector(".collapsable-container1");
   const notificationIcon = document.querySelector(".notification-icon");
   const notificationDropdown = document.querySelector(".notification-dropdown");
 
@@ -61,6 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     collapsableContainer.style.display =
       collapsableContainer.style.display === "block" ? "none" : "block";
+  });
+  formHeader1.addEventListener("click", function () {
+    dropdownIcon1.style.transform =
+      dropdownIcon1.style.transform === "rotate(180deg)"
+        ? "rotate(0deg)"
+        : "rotate(180deg)";
+
+    collapsableContainer1.style.display =
+      collapsableContainer1.style.display === "block" ? "none" : "block";
   });
 
   addbtn.addEventListener("click", function () {
